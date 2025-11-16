@@ -29,7 +29,7 @@
     <main class="main flex w-full justify-between h-screen">
         <section class="sideBare bg-primary w-[25%] text-secondary p-8 flex flex-col items-center justify-between ">
             <h2 class="text-2xl font-bold mb-6">Staff Members</h2>
-            <div class="staff my-9">
+            <div id="staffs__container" class="staffs my-9">
 
             </div>
 
@@ -47,7 +47,7 @@
                 class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-users text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Conference Room</h3>
-                <div class="assignedWorkers">
+                <div class="assignedWorkers" id="conferenceRoom__assignedWorkers">
 
                 </div>
                 <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
@@ -61,7 +61,7 @@
                 class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-server text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Servers Room</h3>
-                <div class="assignedWorkers">
+                <div class="assignedWorkers" id="serversRoom__assignedWorkers">
 
                 </div>
                 <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
@@ -74,7 +74,7 @@
             <div id="securityRoom" class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-shield-alt text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Security Room</h3>
-                <div class="assignedWorkers">
+                <div class="assignedWorkers" id="securityRoom__assignedWorkers">
 
                 </div>
                 <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
@@ -84,11 +84,11 @@
             </div>
 
             <!-- Reception -->
-            <div id="Reception"
+            <div id="reception"
                 class="room flex flex-col items-center justify-center  row-span-2">
                 <i class="fas fa-door-open text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-xl text-center">Reception</h3>
-                <div class="assignedWorkers">
+                <div class="assignedWorkers" id="reception__assignedWorkers">
 
                 </div>
                 <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
@@ -102,7 +102,7 @@
                 class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-user-friends text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Staff Room</h3>
-                <div class="assignedWorkers">
+                <div class="assignedWorkers" id="staffRoom__assignedWorkers">
 
                 </div>
                 <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
@@ -116,7 +116,7 @@
                 class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-vault text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Vault</h3>
-                <div class="assignedWorkers">
+                <div class="assignedWorkers" id="vault__assignedWorkers">
 
                 </div>
                 <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
@@ -126,6 +126,7 @@
             </div>
         </section>
     </main>
+    <script type="module" src="./assets/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 
