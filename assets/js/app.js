@@ -17,9 +17,9 @@ function initializeApp() {
     clearForm();
     addExpBtn.addEventListener('click', addExperienceForm);
 
-    addWorkerBtn.addEventListener('click', () => {
-        form.firstElementChild.setAttribute('data-id', new Date().getTime().toString());
-    });
+    // addWorkerBtn.addEventListener('click', () => {
+    //     form.firstElementChild.setAttribute('data-id', new Date().getTime().toString());
+    // });
 
     form.addEventListener('submit', submitJob);
 
@@ -28,9 +28,9 @@ function initializeApp() {
 function submitJob(e) {
     e.preventDefault();
 
-    const id = form.firstElementChild.getAttribute('data-id');
+    const id = form.firstElementChild.getAttribute('worker-id');
     const worker = {
-        id: id,
+        id: id || new Date().getTime().toString(),
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
@@ -38,7 +38,12 @@ function submitJob(e) {
         experience: getExperiences()
     }
 
-    addWorker(worker);
+    if (id) {
+        updateWorker(worker);
+    } else {
+        addWorker(worker);
+    }
+    
     clearForm();
     loadWorkers();
 
