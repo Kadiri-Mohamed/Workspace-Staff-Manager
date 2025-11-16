@@ -33,7 +33,7 @@
 
             </div>
 
-            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" id="addWorker-button"
                 class="w-full text-primary bg-tertiary text-black font-bold py-3 rounded-lg hover:bg-quaternary hover:text-secondary transition-all duration-300">
                 Add New Worker
             </button>
@@ -59,7 +59,8 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form action="#" id="form">
+                        <form action="#" id="form" >
+                            <input type="text" hidden >
                             <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
                                 <div class="col-span-2">
                                     <label for="name"
@@ -103,14 +104,14 @@
                                                     <label
                                                         class="block mb-2 text-sm font-medium text-gray-700">Company</label>
                                                     <input type="text" name="experiences-0-company" id="experiences-0-company"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand"
+                                                        class="companyName w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand"
                                                         placeholder="Company name">
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label
                                                         class="block mb-2 text-sm font-medium text-gray-700">Role</label>
                                                     <input type="text" name="experiences-0-role" id="experiences-0-role"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand"
+                                                        class="roleCompany w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand"
                                                         placeholder="Role in company">
                                                         
                                                 </div>
@@ -118,13 +119,13 @@
                                                     <label
                                                         class="block mb-2 text-sm font-medium text-gray-700">From</label>
                                                     <input type="date" name="experiences-0-from" id="experiences-0-from"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand">
+                                                        class=" experienceFrom w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand">
                                                 </div>
                                                 <div>
                                                     <label
                                                         class="block mb-2 text-sm font-medium text-gray-700">To</label>
                                                     <input type="date" name="experiences-0-to" id="experiences-0-to"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand">
+                                                        class=" experienceTo w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand">
                                                 </div>
                                             </div>
                                         </div>
@@ -153,6 +154,7 @@
                             </div>
                             <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
                                 <button type="submit"
+                                id="submitForm"
                                     class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                                     <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
