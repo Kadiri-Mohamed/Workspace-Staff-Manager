@@ -1,9 +1,10 @@
-import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
+import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
 import { addExperienceForm, getExperiences , clearForm , displayWorkers} from './ui.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
 const addWorkerBtn = document.getElementById('addWorker-button');
+const staffsList = document.getElementById('staffs__container');
 
 document.addEventListener('DOMContentLoaded', initializeApp);
 
@@ -22,6 +23,7 @@ function initializeApp() {
     // });
 
     form.addEventListener('submit', submitJob);
+    staffsList.addEventListener('click', handleListingActions);
 
 
 }
@@ -47,6 +49,25 @@ function submitJob(e) {
     clearForm();
     loadWorkers();
 
-    console.log(getWorkers())
+    // console.log(getWorkers())
+}
+function deleteWorker(e) {
+    const id = e.target.closest(".staffs__item").getAttribute('data-id');
+    console.log(id);
+    deleteWorkerByID(id);
+    loadWorkers();
+}
+function editWorker(e) {
+    const id = e.target.closest(".staffs__item").getAttribute('data-id');
+    console.log(id);
+    const worker = getWorker(id);
+    // console.log(worker);
 }
 
+function handleListingActions(e) {
+    if (e.target.classList.contains('staffs__item__actions__delete')) {
+        deleteWorker(e);
+    } else if (e.target.classList.contains('staffs__item__actions__edit')) {
+        editWorker(e);
+    }
+}
