@@ -47,3 +47,7 @@ export function getExperiences() {
     }
     return experiences;
 }
+
+export function clearForm() {
+    document.getElementById('form').reset();
+}

@@ -1,5 +1,5 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
-import { addExperienceForm, getExperiences } from './ui.js';
+import { addExperienceForm, getExperiences , clearForm } from './ui.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
@@ -8,6 +8,7 @@ const addWorkerBtn = document.getElementById('addWorker-button');
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 function initializeApp() {
+    clearForm();
     addExpBtn.addEventListener('click', addExperienceForm);
 
     addWorkerBtn.addEventListener('click', () => {
@@ -32,6 +33,7 @@ function submitJob(e) {
     }
 
     addWorker(worker);
+    clearForm();
 
     console.log(getWorkers())
 }
