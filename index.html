@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Document</title>
+</head>
+
+<body class="m-0">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#11224E',
+                        'secondary': '#F87B1B',
+                        'tertiary': '#CBD99B',
+                        'quaternary': '#EEEEEE',
+                    }
+                }
+            }
+        }
+    </script>
+    <main class="main flex w-full  justify-between h-screen flex-col lg:flex-row">
+        <section class="sideBare bg-black w-[25%]">
+            <p>as</p>
+        </section>
+        <section class="rooms relative w-[75%] h-full sm:w-full">
+            <div id="conferenceRoom" class="room bg-gray-200">
+                <p>conferenceRoom</p>
+            </div>
+            <div id="serversRoom" class="room bg-gray-300">
+                <p>serversRoom</p>
+            </div>
+            <div id="securityRoom" class="room bg-gray-400">
+                <p>securityRoom</p>
+            </div>
+            <div id="vault" class="room bg-gray-500">
+                <p>vault</p>
+            </div>
+            <div id="staffRoom" class="room bg-gray-600">
+                <p>staffRoom</p>
+            </div>
+            <div id="Reception" class="room bg-gray-700">
+                <p>Reception</p>
+            </div>
+
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+@import url(../../tailwind.config.js);
+
+
+#conferenceRoom {
+    grid-area: conferenceRoom;
+}
+
+#serversRoom {
+    grid-area: serversRoom;
+}
+
+#securityRoom {
+    grid-area: securityRoom;
+}
+
+#vault {
+    grid-area: vault;
+}
+
+#staffRoom {
+    grid-area: staffRoom;
+}
+
+#Reception {
+    grid-area: Reception;
+}
+
+.room {
+    border: 1px solid black;
+    opacity: 0.5;
+}
+
+.rooms {
+    display: grid;
+    background: url("../images/rooms.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    grid-template-areas:
+        "conferenceRoom conferenceRoom . serversRoom securityRoom"
+        "Reception Reception . . ."
+        "Reception Reception . staffRoom vault";
+}
