@@ -26,48 +26,174 @@
         }
     </script>
 
-    <main class="main flex w-full justify-between h-screen">
-        <section class="sideBare bg-primary w-[25%] text-secondary p-8 flex flex-col items-center justify-between ">
-            <h2 class="text-2xl font-bold mb-6">Staff Members</h2>
-            <div id="staffs__container" class="staffs my-9">
+    <main class="main flex flex-col w-full lg:justify-between lg:flex-row h-screen">
+        <section class="sideBare bg-primary w-[25%] p-8 flex flex-col items-center justify-between ">
+            <h2 class="text-2xl font-bold mb-6 text-secondary ">Staff Members</h2>
+            <div id="staffs__container " class="staffs my-9 ">
 
             </div>
 
-            <button
-                class="w-full bg-tertiary text-black font-bold py-3 rounded-lg hover:bg-quaternary hover:text-secondary transition-all duration-300">
+            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                class="w-full text-primary bg-tertiary text-black font-bold py-3 rounded-lg hover:bg-quaternary hover:text-secondary transition-all duration-300">
                 Add New Worker
             </button>
+            <div id="crud-modal" tabindex="-1" aria-hidden="true"
+                class="hidden bg overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full inset-0">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-primary border border-default rounded-md shadow-sm p-4 md:p-6">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
+                            <h3 class="text-lg font-medium text-heading text-secondary ">
+                                Add new worker
+                            </h3>
+                            <button type="button"
+                                class="text-body text-secondary bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
+                                data-modal-hide="crud-modal">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <form action="#" id="form">
+                            <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
+                                <div class="col-span-2">
+                                    <label for="name"
+                                        class="mb-2.5 text-sm font-medium text-heading text-secondary ">Name</label>
+                                    <input type="text" name="name" id="name"
+                                        class=" border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                        placeholder="Type worker name" required>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="role"
+                                        class="mb-2.5 text-sm font-medium text-heading text-secondary ">Role</label>
+                                    <select name="role" id="role" class="w-full px-4 py-2 border border-gray-300 ">
+                                        <option value="Reception">Reception</option>
+                                        <option value="IT Guy">IT Guy</option>
+                                        <option value="Securete">Security</option>
+                                        <option value="Cleaning">Cleaning</option>
+                                        <option value="Other">Other</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="photo"
+                                        class="mb-2.5 text-sm font-medium text-heading text-secondary ">Photo
+                                        URL</label>
+                                    <input type="url" name="photo" id="photo"
+                                        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                        placeholder="Enter photo URL">
+                                </div>
+                                <div class="col-span-2 flex justify-center">
+                                    <img src="./assets/images/worker.png" alt="" class="rounded-full w-[50%] ">
+                                </div>
+                                <div class="col-span-2">
+                                    <div class="flex justify-between items-center mb-2.5">
+                                        <label class="text-sm font-medium text-heading text-secondary ">Experiences</label>
+                                    </div>
+                                    <div id="experiences__container" class="space-y-4">
+                                        <!-- Première expérience par défaut -->
+                                        <div class="experience-item border border-gray-300 rounded-lg p-4 bg-white" data-experience-id="0">
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div class="col-span-2">
+                                                    <label
+                                                        class="block mb-2 text-sm font-medium text-gray-700">Company</label>
+                                                    <input type="text" name="experiences-0-company" id="experiences-0-company"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand"
+                                                        placeholder="Company name">
+                                                </div>
+                                                <div class="col-span-2">
+                                                    <label
+                                                        class="block mb-2 text-sm font-medium text-gray-700">Role</label>
+                                                    <input type="text" name="experiences-0-role" id="experiences-0-role"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand"
+                                                        placeholder="Role in company">
+                                                        
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block mb-2 text-sm font-medium text-gray-700">From</label>
+                                                    <input type="date" name="experiences-0-from" id="experiences-0-from"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand">
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        class="block mb-2 text-sm font-medium text-gray-700">To</label>
+                                                    <input type="date" name="experiences-0-to" id="experiences-0-to"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-black focus:ring-brand focus:border-brand">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="addExperience"
+                                        class="text-secondary bg-primary hover:bg-tertiary border border-secondary rounded-lg px-3 py-1 text-sm">
+                                        + Add Experience
+                                    </button>
+                                </div>
+
+                                <div class="col-span-2">
+                                    <label for="email"
+                                        class="mb-2.5 text-sm font-medium text-heading text-secondary ">Email</label>
+                                    <input type="email" name="email" id="email"
+                                        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                        placeholder="worker@example.com" required>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="phone"
+                                        class="mb-2.5 text-sm font-medium text-heading text-secondary ">Phone</label>
+                                    <input type="tel" name="phone" id="phone"
+                                        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                        placeholder="+212 6 00 00 00 00" required>
+                                </div>
+
+                            </div>
+                            <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
+                                <button type="submit"
+                                    class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                    <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M5 12h14m-7 7V5" />
+                                    </svg>
+                                    Add new worker
+                                </button>
+                                <button data-modal-hide="crud-modal" type="button"
+                                    class="text-body bg-tertiary box-border hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none text-secondary ">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Rooms Grid Section -->
         <section class="rooms relative w-[75%] h-full bg-cover bg-center">
-
-
-            <div id="conferenceRoom"
-                class="room flex flex-col items-center justify-center ">
+            <div id="conferenceRoom" class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-users text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Conference Room</h3>
                 <div class="assignedWorkers" id="conferenceRoom__assignedWorkers">
 
                 </div>
-                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
-                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
-                    +
-                </button>
+<button class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 assign-btn">
+    +
+</button>
             </div>
 
             <!-- Servers Room -->
-            <div id="serversRoom"
-                class="room flex flex-col items-center justify-center ">
+            <div id="serversRoom" class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-server text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Servers Room</h3>
                 <div class="assignedWorkers" id="serversRoom__assignedWorkers">
 
                 </div>
-                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
-                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
-                    +
-                </button>
+              <button class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 assign-btn">
+    +
+</button>
             </div>
 
             <!-- Security Room -->
@@ -77,52 +203,45 @@
                 <div class="assignedWorkers" id="securityRoom__assignedWorkers">
 
                 </div>
-                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
-                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
-                    +
-                </button>
+               <button class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 assign-btn">
+    +
+</button>
             </div>
 
             <!-- Reception -->
-            <div id="reception"
-                class="room flex flex-col items-center justify-center  row-span-2">
+            <div id="reception" class="room flex flex-col items-center justify-center  row-span-2">
                 <i class="fas fa-door-open text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-xl text-center">Reception</h3>
                 <div class="assignedWorkers" id="reception__assignedWorkers">
 
                 </div>
-                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
-                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
-                    +
-                </button>
+               <button class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 assign-btn">
+    +
+</button>
             </div>
 
             <!-- Staff Room -->
-            <div id="staffRoom"
-                class="room flex flex-col items-center justify-center ">
+            <div id="staffRoom" class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-user-friends text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Staff Room</h3>
                 <div class="assignedWorkers" id="staffRoom__assignedWorkers">
 
                 </div>
-                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
-                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
-                    +
-                </button>
+                <button class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 assign-btn">
+    +
+</button>
             </div>
 
             <!-- Vault -->
-            <div id="vault"
-                class="room flex flex-col items-center justify-center ">
+            <div id="vault" class="room flex flex-col items-center justify-center ">
                 <i class="fas fa-vault text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Vault</h3>
                 <div class="assignedWorkers" id="vault__assignedWorkers">
 
                 </div>
-                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
-                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
-                    +
-                </button>
+               <button class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 assign-btn">
+    +
+</button> 
             </div>
         </section>
     </main>

@@ -27,4 +27,41 @@ function deleteWorker(id) {
     localStorage.setItem('workers', JSON.stringify(filteredWorkers));
 }
 
-export { getWorkers, getWorker, addWorker, updateWorker, deleteWorker };
+function assignWorkerToRoom(workerId, roomId) {
+    const workers = getWorkers();
+    const updatedWorkers = workers.map(worker => {
+        if (worker.id === workerId) {
+            return { ...worker, assignedRoom: roomId };
+        }
+        return worker;
+    });
+    localStorage.setItem('workers', JSON.stringify(updatedWorkers));
+}
+
+function unassignWorker(workerId) {
+    const workers = getWorkers();
+    const updatedWorkers = workers.map(worker => {
+        if (worker.id === workerId) {
+            const { assignedRoom, ...workerWithoutRoom } = worker;
+            return workerWithoutRoom;
+        }
+        return worker;
+    });
+    localStorage.setItem('workers', JSON.stringify(updatedWorkers));
+}
+
+function getWorkersByRoom(roomId) {
+    const workers = getWorkers();
+    return workers.filter(worker => worker.assignedRoom === roomId);
+}
+
+export { 
+    getWorkers, 
+    getWorker, 
+    addWorker, 
+    updateWorker, 
+    deleteWorker,
+    assignWorkerToRoom,
+    unassignWorker,
+    getWorkersByRoom
+};
