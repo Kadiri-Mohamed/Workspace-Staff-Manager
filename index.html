@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <title>Document</title>
+    <title>Office Management</title>
 </head>
 
-<body class="m-0">
+<body class="m-0 ">
     <script>
         tailwind.config = {
             theme: {
@@ -25,32 +25,108 @@
             }
         }
     </script>
-    <main class="main flex w-full  justify-between h-screen flex-col lg:flex-row">
-        <section class="sideBare bg-black w-[25%]">
-            <p>as</p>
-        </section>
-        <section class="rooms relative w-[75%] h-full sm:w-full">
-            <div id="conferenceRoom" class="room bg-gray-200">
-                <p>conferenceRoom</p>
-            </div>
-            <div id="serversRoom" class="room bg-gray-300">
-                <p>serversRoom</p>
-            </div>
-            <div id="securityRoom" class="room bg-gray-400">
-                <p>securityRoom</p>
-            </div>
-            <div id="vault" class="room bg-gray-500">
-                <p>vault</p>
-            </div>
-            <div id="staffRoom" class="room bg-gray-600">
-                <p>staffRoom</p>
-            </div>
-            <div id="Reception" class="room bg-gray-700">
-                <p>Reception</p>
+
+    <main class="main flex w-full justify-between h-screen">
+        <section class="sideBare bg-primary w-[25%] text-secondary p-8 flex flex-col items-center justify-between ">
+            <h2 class="text-2xl font-bold mb-6">Staff Members</h2>
+            <div class="staff my-9">
+
             </div>
 
+            <button
+                class="w-full bg-tertiary text-black font-bold py-3 rounded-lg hover:bg-quaternary hover:text-secondary transition-all duration-300">
+                Add New Worker
+            </button>
+        </section>
+
+        <!-- Rooms Grid Section -->
+        <section class="rooms relative w-[75%] h-full bg-cover bg-center">
+
+
+            <div id="conferenceRoom"
+                class="room flex flex-col items-center justify-center ">
+                <i class="fas fa-users text-3xl text-black"></i>
+                <h3 class="text-black font-bold text-lg text-center">Conference Room</h3>
+                <div class="assignedWorkers">
+
+                </div>
+                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
+                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
+                    +
+                </button>
+            </div>
+
+            <!-- Servers Room -->
+            <div id="serversRoom"
+                class="room flex flex-col items-center justify-center ">
+                <i class="fas fa-server text-3xl text-black"></i>
+                <h3 class="text-black font-bold text-lg text-center">Servers Room</h3>
+                <div class="assignedWorkers">
+
+                </div>
+                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
+                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
+                    +
+                </button>
+            </div>
+
+            <!-- Security Room -->
+            <div id="securityRoom" class="room flex flex-col items-center justify-center ">
+                <i class="fas fa-shield-alt text-3xl text-black"></i>
+                <h3 class="text-black font-bold text-lg text-center">Security Room</h3>
+                <div class="assignedWorkers">
+
+                </div>
+                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
+                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
+                    +
+                </button>
+            </div>
+
+            <!-- Reception -->
+            <div id="Reception"
+                class="room flex flex-col items-center justify-center  row-span-2">
+                <i class="fas fa-door-open text-3xl text-black"></i>
+                <h3 class="text-black font-bold text-xl text-center">Reception</h3>
+                <div class="assignedWorkers">
+
+                </div>
+                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
+                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
+                    +
+                </button>
+            </div>
+
+            <!-- Staff Room -->
+            <div id="staffRoom"
+                class="room flex flex-col items-center justify-center ">
+                <i class="fas fa-user-friends text-3xl text-black"></i>
+                <h3 class="text-black font-bold text-lg text-center">Staff Room</h3>
+                <div class="assignedWorkers">
+
+                </div>
+                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
+                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
+                    +
+                </button>
+            </div>
+
+            <!-- Vault -->
+            <div id="vault"
+                class="room flex flex-col items-center justify-center ">
+                <i class="fas fa-vault text-3xl text-black"></i>
+                <h3 class="text-black font-bold text-lg text-center">Vault</h3>
+                <div class="assignedWorkers">
+
+                </div>
+                <button data-modal-target="Assign-modal" data-modal-toggle="Assign-modal"
+                    class="mt-3 text-secondary bg-primary hover:bg-tertiary rounded-lg px-4 py-2 ">
+                    +
+                </button>
+            </div>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 
 </html>
