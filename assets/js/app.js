@@ -1,5 +1,6 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
 import { addExperienceForm, getExperiences , clearForm , displayWorkers} from './ui.js';
+import { validateForm } from './validation.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
@@ -29,6 +30,10 @@ function initializeApp() {
 }
 function submitJob(e) {
     e.preventDefault();
+    console.log(validateForm());
+    if (!validateForm()) {
+        return;
+    }
 
     const id = form.firstElementChild.getAttribute('worker-id');
     const worker = {

@@ -67,7 +67,8 @@
                                         class="mb-2.5 text-sm font-medium text-heading text-secondary ">Name</label>
                                     <input type="text" name="name" id="name"
                                         class=" border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                        placeholder="Type worker name" required>
+                                        placeholder="Type worker name" >
+                                        <div id="name-error" class="error text-red-500 hidden"></div>
                                 </div>
                                 <div class="col-span-2">
                                     <label for="role"
@@ -80,6 +81,8 @@
                                         <option value="Other">Other</option>
 
                                     </select>
+                                        <div id="role-error" class="error text-red-500 hidden"></div>
+
                                 </div>
                                 <div class="col-span-2">
                                     <label for="photo"
@@ -141,14 +144,18 @@
                                         class="mb-2.5 text-sm font-medium text-heading text-secondary ">Email</label>
                                     <input type="email" name="email" id="email"
                                         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                        placeholder="worker@example.com" required>
+                                        placeholder="worker@example.com" >
+                                        <div id="email-error" class="error text-red-500 hidden"></div>
+
                                 </div>
                                 <div class="col-span-2">
                                     <label for="phone"
                                         class="mb-2.5 text-sm font-medium text-heading text-secondary ">Phone</label>
                                     <input type="tel" name="phone" id="phone"
                                         class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                        placeholder="+212 6 00 00 00 00" required>
+                                        placeholder="+212 6 00 00 00 00" >
+                                        <div id="phone-error" class="error text-red-500 hidden"></div>
+
                                 </div>
 
                             </div>
