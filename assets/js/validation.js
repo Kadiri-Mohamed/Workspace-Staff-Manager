@@ -55,9 +55,7 @@ function validateForm() {
     for (let input of inputs) {
         if (!validateField(input.field, input.value)) {
             valid = false
-        } else {
-            valid = true
-        }
+        } 
     }
     return valid
 }
