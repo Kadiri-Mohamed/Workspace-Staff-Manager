@@ -27,12 +27,23 @@
 
 .rooms {
     display: grid;
+    width: 100%;
     background: url("../images/rooms.jpg");
     background-position: center;
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     grid-template-areas:
         "conferenceRoom conferenceRoom . serversRoom securityRoom"
         "Reception Reception . . ."
         "Reception Reception . staffRoom vault";
+}
+
+@media (max-width: 768px) {
+    .rooms {
+        background: none;
+        grid-template-areas:
+         'conferenceRoom serversRoom securityRoom'
+         'staffRoom Reception vault';
+        ;
+    }
 }
