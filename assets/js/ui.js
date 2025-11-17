@@ -66,19 +66,25 @@ export function clearForm() {
     document.getElementById('form').reset();
 }
 
+export function displayPicture(image) {
+    const picture = document.getElementById('displayedPic');
+    if(!image) return;
+    picture.src = image;
+}
+
 export function displayWorkers(workers) {
     const container = document.getElementById('staffs__container');
     container.innerHTML = '';
     for (let worker of workers) {
         const workerHTML = `
-            <div class="staffs__item bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}">
+            <div class="staffs__item w-full bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}">
     <div class="staffs__item__info flex items-center justify-between">
         <div class="staffs__item__info__avatar">
-            <img src="./assets/images/worker.png" alt="Avatar" class="w-16 h-16 rounded-full object-cover">
+            <img src="${worker.picture}" alt="Avatar" class="w-16 h-16 rounded-full object-cover">
         </div>
         <div class="staffs__item__info__content flex-1">
             <div class="staffs__item__info__name">
-                <h3 class="font-semibold text-primary text-lg">${worker.name}</h3>
+                <h3 class="font-semibold text-primary text-lg"><button class="displayWorkerButton">${worker.name}</button></h3>
             </div>
             <div class="staffs__item__info__role">
                 <p class="text-gray-600 text-sm">${worker.role}</p>

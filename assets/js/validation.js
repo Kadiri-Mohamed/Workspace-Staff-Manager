@@ -14,8 +14,17 @@ const validationRules = {
     'phone': {
         regex: /^\+212[67]\d{8}$/,
         message: "Phone must be 8-15 digits."
+    },
+    'imageUrl': {
+        regex:  /^https?:\/\/.*\.(png|jpg|jpeg|gif|svg|webp)$/i,
+        message: "Invalid URL format."
     }
+
 };
+
+export function imageUrlValidation(url) {
+    return url.match(validationRules['imageUrl'].regex) ? true : false;
+}
 
 function toggleError(field, show, message = '') {
     if (show) {
@@ -55,7 +64,7 @@ function validateForm() {
     for (let input of inputs) {
         if (!validateField(input.field, input.value)) {
             valid = false
-        } 
+        }
     }
     return valid
 }

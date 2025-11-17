@@ -1,6 +1,6 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
-import { addExperienceForm, getExperiences , clearForm , displayWorkers} from './ui.js';
-import { validateForm } from './validation.js';
+import { addExperienceForm, getExperiences , clearForm , displayWorkers , displayPicture} from './ui.js';
+import { validateForm , imageUrlValidation} from './validation.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
@@ -24,6 +24,14 @@ function initializeApp() {
     // });
 
     form.addEventListener('submit', submitJob);
+    document.getElementById('photo').addEventListener('input',()=>{
+        let valid = imageUrlValidation(document.getElementById('photo').value);
+        if(valid){
+            displayPicture(document.getElementById('photo').value);
+        }else{
+            displayPicture('./assets/images/worker.png');
+        }
+    })
     staffsList.addEventListener('click', handleListingActions);
 
 
@@ -40,6 +48,7 @@ function submitJob(e) {
         id: id || new Date().getTime().toString(),
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
+        picture: document.getElementById('photo').value || './assets/images/worker.png',
         phone: document.getElementById('phone').value,
         role: document.getElementById('role').value,
         experience: getExperiences()
