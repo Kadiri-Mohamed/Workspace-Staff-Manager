@@ -4,6 +4,13 @@ export function addExperienceForm() {
     const experienceHTML = `
         <div class="experience-item border border-gray-300 rounded-lg p-4 bg-white mt-3" data-experience-id="${experienceCount}">
             <div class="grid grid-cols-2 gap-4">
+            <button type="button" class="remove-experience">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="red" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                </svg>
+            </button>
                 <div class="col-span-2">
                     <label class="block mb-2 text-sm font-medium text-gray-700">Company</label>
                     <input type="text" name="experiences-${experienceCount}-company" id="experiences-${experienceCount}-company"
@@ -29,8 +36,15 @@ export function addExperienceForm() {
             </div>
         </div>
     `;
+    
+    container.innerHTML += experienceHTML;
 
-    container.insertAdjacentHTML('beforeend', experienceHTML);
+    for(let removeButton of container.getElementsByClassName('remove-experience')){
+        removeButton.addEventListener('click', (e)=>{
+            e.target.closest(".experience-item").remove();
+        })
+    }
+
 }
 
 export function getExperiences() {
