@@ -1,24 +1,28 @@
-// const validationRules = {
-//     'company-name': {
-//         regex: /^[a-zA-Z0-9\s,.'-]{2,50}$/,
-//         message: "Company name must be 2-50 characters long."
-//     },
-//     'job-title': {
-//         regex: /^[a-zA-Z0-9\s,.'-]{2,50}$/,
-//         message: "Job title must be 2-50 characters long."
-//     },
-//     'description': {
-//         regex: /.{10,}/,
-//         message: "Description must be at least 10 characters long."
-//     }
-// };
+const validationRules = {
+    'name': {
+        regex: /^[a-zA-Z\s'-]{2,50}$/,
+        message: "Name must be 2-50 letters only."
+    },
+    'role': {
+        regex: /^[a-zA-Z\s'-]{2,50}$/,
+        message: "Role must be 2-50 letters only."
+    },
+    'email': {
+        regex: /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/,
+        message: "Invalid email format."
+    },
+    'phone': {
+        regex: /^\+212[67]\d{8}$/,
+        message: "Phone must be 8-15 digits."
+    }
+};
 
 function toggleError(field, show, message = '') {
     if (show) {
         field.classList.add("border-red-500")
         field.nextElementSibling.classList.remove('hidden');
         field.nextElementSibling.textContent = message;
-    }else{
+    } else {
         field.classList.remove("border-red-500")
         field.nextElementSibling.classList.add('hidden');
         field.nextElementSibling.textContent = '';
@@ -26,19 +30,22 @@ function toggleError(field, show, message = '') {
 }
 
 function validateField(field, value) {
-    
+    const rule = validationRules[field.name];
     if (value == '') {
-        toggleError(field, true, 'error');
+        toggleError(field, true, 'field is required');
         return false;
-    }else{
-        toggleError(field, false);
-        return true;
     }
+    if (!rule.regex.test(value)) {
+        toggleError(field, true, rule.message);
+        return false;
+    }
+    toggleError(field, false);
+    return true;
 }
 
 function validateForm() {
     let valid = true
-    
+
     const inputs = [
         { field: document.getElementById('name'), value: document.getElementById('name').value },
         { field: document.getElementById('role'), value: document.getElementById('role').value },
@@ -48,7 +55,7 @@ function validateForm() {
     for (let input of inputs) {
         if (!validateField(input.field, input.value)) {
             valid = false
-        }else{
+        } else {
             valid = true
         }
     }
