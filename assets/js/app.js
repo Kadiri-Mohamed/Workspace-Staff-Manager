@@ -1,6 +1,6 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
-import { addExperienceForm, getExperiences , clearForm , displayWorkers , displayPicture} from './ui.js';
-import { validateForm , imageUrlValidation} from './validation.js';
+import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker } from './ui.js';
+import { validateForm, imageUrlValidation } from './validation.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', initializeApp);
 
 function loadWorkers() {
     const workers = getWorkers();
-    displayWorkers(workers);   
+    displayWorkers(workers);
 }
 
 function initializeApp() {
@@ -24,11 +24,11 @@ function initializeApp() {
     // });
 
     form.addEventListener('submit', submitJob);
-    document.getElementById('photo').addEventListener('input',()=>{
+    document.getElementById('photo').addEventListener('input', () => {
         let valid = imageUrlValidation(document.getElementById('photo').value);
-        if(valid){
+        if (valid) {
             displayPicture(document.getElementById('photo').value);
-        }else{
+        } else {
             displayPicture('./assets/images/worker.png');
         }
     })
@@ -38,7 +38,7 @@ function initializeApp() {
 }
 function submitJob(e) {
     e.preventDefault();
-    console.log(validateForm());
+    // console.log(validateForm());
     if (!validateForm()) {
         return;
     }
@@ -59,21 +59,20 @@ function submitJob(e) {
     } else {
         addWorker(worker);
     }
-    
+
     clearForm();
     loadWorkers();
-
     // console.log(getWorkers())
 }
 function deleteWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
-    console.log(id);
+    // console.log(id);
     deleteWorkerByID(id);
     loadWorkers();
 }
 function editWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
-    console.log(id);
+    // console.log(id);
     const worker = getWorker(id);
     // console.log(worker);
 }
@@ -83,5 +82,9 @@ function handleListingActions(e) {
         deleteWorker(e);
     } else if (e.target.classList.contains('staffs__item__actions__edit')) {
         editWorker(e);
+    } else if (e.target.classList.contains('displayWorkerButton')) {
+        let worker = getWorker(e.target.closest(".staffs__item").getAttribute('data-id'));
+        console.log(worker);
+        displayWorker(worker);
     }
 }

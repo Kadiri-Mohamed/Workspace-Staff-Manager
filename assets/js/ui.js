@@ -77,14 +77,14 @@ export function displayWorkers(workers) {
     container.innerHTML = '';
     for (let worker of workers) {
         const workerHTML = `
-            <div class="staffs__item w-full bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}">
+            <div class="staffs__item text-start w-full bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}">
     <div class="staffs__item__info flex items-center justify-between">
         <div class="staffs__item__info__avatar">
-            <img src="${worker.picture}" alt="Avatar" class="w-16 h-16 rounded-full object-cover">
+            <img src="${worker.picture}" alt="Avatar" class="w-16 h-16 rounded-full object-cover me-5">
         </div>
         <div class="staffs__item__info__content flex-1">
             <div class="staffs__item__info__name">
-                <h3 class="font-semibold text-primary text-lg"><button class="displayWorkerButton">${worker.name}</button></h3>
+                <h3 class="font-semibold text-primary text-lg"><button class="displayWorkerButton" data-modal-target="worker-modal" data-modal-toggle="worker-modal">${worker.name}</button></h3>
             </div>
             <div class="staffs__item__info__role">
                 <p class="text-gray-600 text-sm">${worker.role}</p>
@@ -102,5 +102,23 @@ export function displayWorkers(workers) {
 </div>
     `
         container.innerHTML += workerHTML;
+    }
+}
+export function displayWorker(worker) {
+    document.getElementById("worker-modal__name").textContent = worker.name;
+    document.getElementById("worker-modal__role").textContent = worker.role;
+    document.getElementById("worker-modal__email").textContent = worker.email;
+    document.getElementById("worker-modal__pic").src = worker.picture;
+    document.getElementById("worker-modal-exps").innerHTML = "";
+
+    for(let exp of worker.experience){
+        document.getElementById("worker-modal-exps").innerHTML += `
+         <li class="mb-11 ms-6">
+                                        <span
+                                            class="absolute flex items-center justify-center w-6 h-6 bg-brand-softer text-fg-brand rounded-full -start-3 ring-8 ring-buffer-medium">
+                                        </span>
+                                        <h3 class="flex items-start my-2 text-lg font-semibold text-secondary" id="worker-modal-exp">${exp.companyName}</h3>
+                                        <p class="text-body mb-5 text-quaternary" id="worker-modal-exp-role">${exp.role}</p>
+                                    </li>`
     }
 }
