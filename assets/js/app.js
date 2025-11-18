@@ -1,12 +1,13 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
-import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker } from './ui.js';
+import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker, displayPossibleWorkersByroom } from './ui.js';
 import { validateForm, imageUrlValidation } from './validation.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
 const addWorkerBtn = document.getElementById('addWorker-button');
 const staffsList = document.getElementById('staffs__container');
-
+const assigneBtns = document.getElementsByClassName("assign-btn")
+const assignWorker = document.getElementsByClassName("assignWorker")
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 function loadWorkers() {
@@ -22,6 +23,22 @@ function initializeApp() {
     // addWorkerBtn.addEventListener('click', () => {
     //     form.firstElementChild.setAttribute('data-id', new Date().getTime().toString());
     // });
+    for (let btn of assigneBtns) {
+        btn.addEventListener('click', (e) => {
+            const roomId = e.target.closest('.room').getAttribute('data-roomId');
+            displayPossibleWorkersByroom(roomId, getWorkers());
+            for (let assign of assignWorker) {
+                assign.addEventListener("click", (e) => { 
+                    let workerId = e.target.closest('.workerCard').getAttribute('data-workerIdee');
+                    assignWorkerToRoom(workerId , roomId)
+                     displayPossibleWorkersByroom(roomId, getWorkers());
+                     loadWorkers()
+                    // console.log(workerId)
+                })
+            }
+            // console.log(roomId);
+        })
+    }
 
     form.addEventListener('submit', submitJob);
     document.getElementById('photo').addEventListener('input', () => {
@@ -51,6 +68,8 @@ function submitJob(e) {
         picture: document.getElementById('photo').value || './assets/images/worker.png',
         phone: document.getElementById('phone').value,
         role: document.getElementById('role').value,
+        room: null,
+        assigned: false,
         experience: getExperiences()
     }
 

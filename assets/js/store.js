@@ -1,3 +1,12 @@
+export const roomsList = [
+    { id: 1, name: "conferenceRoom", capacity: 10, rolesAccepted: ["IT Guy", "Other", "Manager"] },
+    { id: 2, name: "serversRoom", capacity: 2, rolesAccepted: ["IT Guy", "Manager"] },
+    { id: 3, name: "securityRoom", capacity: 5, rolesAccepted: ["Securete", "Manager", "Cleaning"] },
+    { id: 4, name: "reception", capacity: 5, rolesAccepted: ["Reception", "Cleaning", "Manager"] },
+    { id: 5, name: "staffRoom", capacity: 5, rolesAccepted: ["IT Guy", "Cleaning", "Manager"] },
+    { id: 6, name: "vault", capacity: 5, rolesAccepted: ["IT Guy", "Manager", "Securete", "Reception"] },
+]
+
 function getWorkers() {
     const workers = localStorage.getItem('workers');
     return workers ? JSON.parse(workers) : [];
@@ -31,10 +40,11 @@ function assignWorkerToRoom(workerId, roomId) {
     const workers = getWorkers();
     const updatedWorkers = workers.map(worker => {
         if (worker.id === workerId) {
-            return { ...worker, assignedRoom: roomId };
+            return { ...worker, room: roomId , assigned : true };
         }
         return worker;
     });
+    // console.log(updatedWorkers)
     localStorage.setItem('workers', JSON.stringify(updatedWorkers));
 }
 
@@ -55,11 +65,11 @@ function getWorkersByRoom(roomId) {
     return workers.filter(worker => worker.assignedRoom === roomId);
 }
 
-export { 
-    getWorkers, 
-    getWorker, 
-    addWorker, 
-    updateWorker, 
+export {
+    getWorkers,
+    getWorker,
+    addWorker,
+    updateWorker,
     deleteWorker,
     assignWorkerToRoom,
     unassignWorker,

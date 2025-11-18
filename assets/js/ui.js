@@ -1,3 +1,4 @@
+import { roomsList, assignWorkerToRoom } from "./store.js";
 export function addExperienceForm() {
     const container = document.getElementById('experiences__container');
     const experienceCount = container.querySelectorAll('.experience-item').length;
@@ -39,8 +40,8 @@ export function addExperienceForm() {
     
     container.innerHTML += experienceHTML;
 
-    for(let removeButton of container.getElementsByClassName('remove-experience')){
-        removeButton.addEventListener('click', (e)=>{
+    for (let removeButton of container.getElementsByClassName('remove-experience')) {
+        removeButton.addEventListener('click', (e) => {
             e.target.closest(".experience-item").remove();
         })
     }
@@ -68,7 +69,7 @@ export function clearForm() {
 
 export function displayPicture(image) {
     const picture = document.getElementById('displayedPic');
-    if(!image) return;
+    if (!image) return;
     picture.src = image;
 }
 
@@ -76,7 +77,8 @@ export function displayWorkers(workers) {
     const container = document.getElementById('staffs__container');
     container.innerHTML = '';
     for (let worker of workers) {
-        const workerHTML = `
+        if (worker.assigned == false) {
+            const workerHTML = `
             <div class="staffs__item text-start w-full bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}">
     <div class="staffs__item__info flex items-center justify-between">
         <div class="staffs__item__info__avatar">
@@ -101,7 +103,8 @@ export function displayWorkers(workers) {
     </div>
 </div>
     `
-        container.innerHTML += workerHTML;
+            container.innerHTML += workerHTML;
+        }
     }
 }
 export function displayWorker(worker) {
@@ -111,7 +114,7 @@ export function displayWorker(worker) {
     document.getElementById("worker-modal__pic").src = worker.picture;
     document.getElementById("worker-modal-exps").innerHTML = "";
 
-    for(let exp of worker.experience){
+    for (let exp of worker.experience) {
         document.getElementById("worker-modal-exps").innerHTML += `
          <li class="mb-11 ms-6">
                                         <span
@@ -121,4 +124,25 @@ export function displayWorker(worker) {
                                         <p class="text-body mb-5 text-quaternary" id="worker-modal-exp-role">${exp.role}</p>
                                     </li>`
     }
+}
+
+export function displayPossibleWorkersByroom(roomId, workers) {
+    const list = document.getElementById("availvableWorkers-list")
+    list.innerHTML = "";
+    let room = roomsList.find(room => room.id == roomId)
+    let possibleWorkers = workers.filter(worker => worker.roomId == null && room.rolesAccepted.includes(worker.role) && worker.assigned == false)
+    for (let worker of possibleWorkers) {
+        list.innerHTML += `
+        <li class="flex items-center justify-between gap-4 py-4 px-6 border-b border-buffer-light workerCard" data-workerIdee="${worker.id}">
+            <div class="flex items-center gap-4">
+                <img class="w-12 h-12 rounded-full" src="${worker.picture}" alt="worker picture">
+                <div>
+                    <h3 class="text-lg font-semibold text-secondary">${worker.name}</h3>
+                    <p class="text-body text-quaternary">${worker.role}</p>
+                </div>
+            </div>
+            <button class="p-3 border border-quaternary rounded-md text-quaternary assignWorker">Assign</button>
+        </li>`
+    }
+
 }

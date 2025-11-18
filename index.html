@@ -122,6 +122,7 @@
                                         <option value="IT Guy">IT Guy</option>
                                         <option value="Securete">Security</option>
                                         <option value="Cleaning">Cleaning</option>
+                                        <option value="Manager">Manager</option>
                                         <option value="Other">Other</option>
 
                                     </select>
@@ -276,7 +277,7 @@
 
         <!-- Rooms Grid Section -->
         <section class="rooms relative w-full h-full bg-center lg:w-[70%]">
-            <div id="conferenceRoom" class="room flex flex-col items-center justify-center ">
+            <div id="conferenceRoom" class="room flex flex-col items-center justify-center " data-roomId="1">
                 <i class="fas fa-users text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Conference Room</h3>
                 <div class="assignedWorkers" id="conferenceRoom__assignedWorkers">
@@ -288,7 +289,7 @@
             </div>
 
             <!-- Servers Room -->
-            <div id="serversRoom" class="room flex flex-col items-center justify-center ">
+            <div id="serversRoom" class="room flex flex-col items-center justify-center " data-roomId="2">
                 <i class="fas fa-server text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Servers Room</h3>
                 <div class="assignedWorkers" id="serversRoom__assignedWorkers">
@@ -300,7 +301,7 @@
             </div>
 
             <!-- Security Room -->
-            <div id="securityRoom" class="room flex flex-col items-center justify-center ">
+            <div id="securityRoom" class="room flex flex-col items-center justify-center " data-roomId="3">
                 <i class="fas fa-shield-alt text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Security Room</h3>
                 <div class="assignedWorkers" id="securityRoom__assignedWorkers">
@@ -312,7 +313,7 @@
             </div>
 
             <!-- Reception -->
-            <div id="reception" class="room flex flex-col items-center justify-center  row-span-2">
+            <div id="reception" class="room flex flex-col items-center justify-center  row-span-2" data-roomId="4">
                 <i class="fas fa-door-open text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-xl text-center">Reception</h3>
                 <div class="assignedWorkers" id="reception__assignedWorkers">
@@ -324,7 +325,7 @@
             </div>
 
             <!-- Staff Room -->
-            <div id="staffRoom" class="room flex flex-col items-center justify-center ">
+            <div id="staffRoom" class="room flex flex-col items-center justify-center " data-roomId="5">
                 <i class="fas fa-user-friends text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Staff Room</h3>
                 <div class="assignedWorkers" id="staffRoom__assignedWorkers">
@@ -336,7 +337,7 @@
             </div>
 
             <!-- Vault -->
-            <div id="vault" class="room flex flex-col items-center justify-center ">
+            <div id="vault" class="room flex flex-col items-center justify-center " data-roomId="6">
                 <i class="fas fa-vault text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Vault</h3>
                 <div class="assignedWorkers" id="vault__assignedWorkers">
