@@ -1,5 +1,5 @@
 export const roomsList = [
-    { id: 1, name: "conferenceRoom", capacity: 10, rolesAccepted: ["IT Guy", "Other", "Manager"] },
+    { id: 1, name: "conferenceRoom", capacity: 2, rolesAccepted: ["IT Guy", "Other", "Manager"] },
     { id: 2, name: "serversRoom", capacity: 2, rolesAccepted: ["IT Guy", "Manager"] },
     { id: 3, name: "securityRoom", capacity: 5, rolesAccepted: ["Securete", "Manager", "Cleaning"] },
     { id: 4, name: "reception", capacity: 5, rolesAccepted: ["Reception", "Cleaning", "Manager"] },
@@ -37,15 +37,28 @@ function deleteWorker(id) {
 }
 
 function assignWorkerToRoom(workerId, roomId) {
+    console.log(workerId, roomId);
+    const room = roomsList.find(room => room.id == roomId);
     const workers = getWorkers();
-    const updatedWorkers = workers.map(worker => {
-        if (worker.id === workerId) {
-            return { ...worker, room: roomId , assigned : true };
-        }
-        return worker;
-    });
-    // console.log(updatedWorkers)
-    localStorage.setItem('workers', JSON.stringify(updatedWorkers));
+    const alreadyAssigned = workers.filter(worker => worker.room === Number(roomId));
+    if (alreadyAssigned.length >= room.capacity) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Room is full"
+        });
+    }else{
+
+        
+        const updatedWorkers = workers.map(worker => {
+            if (worker.id === workerId && !worker.assigned) {
+                return { ...worker, room: Number(roomId), assigned: true };
+            }
+            return worker;
+        });
+        // console.log(updatedWorkers)
+        localStorage.setItem('workers', JSON.stringify(updatedWorkers));
+    }
 }
 
 function unassignWorker(workerId) {
