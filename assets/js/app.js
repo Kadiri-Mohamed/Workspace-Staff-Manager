@@ -87,6 +87,12 @@ function submitJob(e) {
         staffsList.addEventListener('click', handleListingActions);
     } else {
         addWorker(worker);
+        Swal.fire({
+            icon: "success",
+            title: "Worker has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
         staffsList.addEventListener('click', handleListingActions);
     }
 

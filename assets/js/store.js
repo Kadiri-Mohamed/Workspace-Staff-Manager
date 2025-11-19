@@ -7,6 +7,8 @@ export const roomsList = [
     { id: 6, name: "vault", capacity: 2, rolesAccepted: ["Manager"] },
 ]
 
+export const importantRooms = [2, 3, 4, 6];
+
 function getWorkers() {
     const workers = localStorage.getItem('workers');
     return workers ? JSON.parse(workers) : [];
@@ -78,7 +80,7 @@ function unassignWorker(workerId) {
         const room = roomsList.find(r => r.id === oldRoomId);
         const roomElem = document.getElementById(room.name);
         const remainingWorkers = updatedWorkers.filter(w => w.room === oldRoomId);
-        if (roomElem && remainingWorkers.length === 0) {
+        if (roomElem && remainingWorkers.length === 0 && importantRooms.includes(room.id)) {
             roomElem.classList.add("bg-red-500/50");
         }
     }
