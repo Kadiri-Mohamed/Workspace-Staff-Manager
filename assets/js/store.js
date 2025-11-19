@@ -3,7 +3,7 @@ export const roomsList = [
     { id: 2, name: "serversRoom", capacity: 2, rolesAccepted: ["IT Guy", "Manager"] },
     { id: 3, name: "securityRoom", capacity: 5, rolesAccepted: ["Securete", "Manager", "Cleaning"] },
     { id: 4, name: "reception", capacity: 2, rolesAccepted: ["Reception", "Cleaning", "Manager"] },
-    { id: 5, name: "staffRoom", capacity:4, rolesAccepted: ["IT Guy", "Cleaning", "Manager"] },
+    { id: 5, name: "staffRoom", capacity: 4, rolesAccepted: ["IT Guy", "Cleaning", "Manager"] },
     { id: 6, name: "vault", capacity: 2, rolesAccepted: ["Manager"] },
 ]
 
@@ -56,18 +56,32 @@ function assignWorkerToRoom(workerId, roomId) {
         });
         // console.log(updatedWorkers)
         localStorage.setItem('workers', JSON.stringify(updatedWorkers));
+        const roomElem = document.getElementById(room.name);
+        if (roomElem) {
+            roomElem.classList.remove("bg-red-500/50");
+        }
     }
 }
 
 function unassignWorker(workerId) {
     const workers = getWorkers();
+    let oldRoomId = null;
     const updatedWorkers = workers.map(worker => {
         if (worker.id === workerId) {
+            oldRoomId = worker.room;
             return { ...worker, room: null, assigned: false };
         }
         return worker;
     });
     localStorage.setItem('workers', JSON.stringify(updatedWorkers));
+    if (oldRoomId !== null) {
+        const room = roomsList.find(r => r.id === oldRoomId);
+        const roomElem = document.getElementById(room.name);
+        const remainingWorkers = updatedWorkers.filter(w => w.room === oldRoomId);
+        if (roomElem && remainingWorkers.length === 0) {
+            roomElem.classList.add("bg-red-500/50");
+        }
+    }
 }
 
 function getWorkersByRoom(roomId) {
