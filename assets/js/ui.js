@@ -52,13 +52,15 @@ export function getExperiences() {
     const experienceBlocks = document.getElementsByClassName('experience-item');
     const experiences = []
     for (let experienceBlock of experienceBlocks) {
-        const experience = {
-            companyName: experienceBlock.querySelector('.companyName').value,
-            role: experienceBlock.querySelector('.roleCompany').value,
-            from: experienceBlock.querySelector('.experienceFrom').value,
-            to: experienceBlock.querySelector('.experienceTo').value
+        if (experienceBlock.querySelector('.companyName').value !== "" && experienceBlock.querySelector('.roleCompany').value !== "" && experienceBlock.querySelector('.experienceFrom').value !== "" && experienceBlock.querySelector('.experienceTo').value !== "") {
+            const experience = {
+                companyName: experienceBlock.querySelector('.companyName').value,
+                role: experienceBlock.querySelector('.roleCompany').value,
+                from: experienceBlock.querySelector('.experienceFrom').value,
+                to: experienceBlock.querySelector('.experienceTo').value
+            }
+            experiences.push(experience);
         }
-        experiences.push(experience);
     }
     return experiences;
 }
@@ -114,15 +116,18 @@ export function displayWorker(worker) {
     document.getElementById("worker-modal__pic").src = worker.picture;
     document.getElementById("worker-modal-exps").innerHTML = "";
 
-    for (let exp of worker.experience) {
-        document.getElementById("worker-modal-exps").innerHTML += `
-         <li class="mb-11 ms-6">
-                                        <span
-                                            class="absolute flex items-center justify-center w-6 h-6 bg-brand-softer text-fg-brand rounded-full -start-3 ring-8 ring-buffer-medium">
+    if (worker.experience.length > 0) {
+
+        for (let exp of worker.experience) {
+            document.getElementById("worker-modal-exps").innerHTML += `
+            <li class="mb-11 ms-6">
+            <span
+            class="absolute flex items-center justify-center w-6 h-6 bg-brand-softer text-fg-brand rounded-full -start-3 ring-8 ring-buffer-medium">
                                         </span>
                                         <h3 class="flex items-start my-2 text-lg font-semibold text-secondary" id="worker-modal-exp">${exp.companyName}</h3>
                                         <p class="text-body mb-5 text-quaternary" id="worker-modal-exp-role">${exp.role}</p>
                                     </li>`
+        }
     }
 }
 
@@ -150,7 +155,7 @@ export function displayAssignedWorkers(roomId, workers) {
     const room = roomsList.find(room => room.id == roomId)
     const list = document.getElementById(`${room.name}__assignedWorkers`)
     let possibleWorkers = workers.filter(worker => worker.room == roomId)
-    if(possibleWorkers.length > 0){
+    if (possibleWorkers.length > 0) {
         list.closest('.room').classList.add("justify-start")
         list.closest('.room').classList.remove("justify-center")
         // list.closest('i').classList.add("hidden")
