@@ -1,4 +1,5 @@
 import { roomsList, assignWorkerToRoom, unassignWorker, getWorkers } from "./store.js";
+import { validateDate } from "./validation.js";
 export function addExperienceForm() {
     const container = document.getElementById('experiences__container');
     const experienceCount = container.querySelectorAll('.experience-item').length;
@@ -52,6 +53,7 @@ export function getExperiences() {
     const experienceBlocks = document.getElementsByClassName('experience-item');
     const experiences = []
     for (let experienceBlock of experienceBlocks) {
+        
         if (experienceBlock.querySelector('.companyName').value !== "" && experienceBlock.querySelector('.roleCompany').value !== "" && experienceBlock.querySelector('.experienceFrom').value !== "" && experienceBlock.querySelector('.experienceTo').value !== "") {
             const experience = {
                 companyName: experienceBlock.querySelector('.companyName').value,
@@ -60,9 +62,9 @@ export function getExperiences() {
                 to: experienceBlock.querySelector('.experienceTo').value
             }
             experiences.push(experience);
+            return experiences;
         }
     }
-    return experiences;
 }
 
 export function clearForm() {

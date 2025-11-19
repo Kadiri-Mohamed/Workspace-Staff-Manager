@@ -69,7 +69,12 @@
 }
 
 @media (max-width: 768px) {
+    .room{
+        padding-bottom: 10px;
+    }
     .rooms {
+         grid-template-columns: 1fr;
+        grid-template-rows: auto;
         background: none;
         grid-template-areas:
             'conferenceRoom serversRoom securityRoom'

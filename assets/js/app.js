@@ -1,6 +1,6 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
 import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker, displayPossibleWorkersByroom, displayAssignedWorkers } from './ui.js';
-import { validateForm, imageUrlValidation } from './validation.js';
+import { validateForm, imageUrlValidation, validateDate } from './validation.js';
 
 const form = document.getElementById('form');
 const addExpBtn = document.getElementById('addExperience');
@@ -58,6 +58,18 @@ function submitJob(e) {
     }
 
     const id = form.firstElementChild.getAttribute('worker-id');
+    if (getExperiences()) {
+        for (let experience of getExperiences()) {
+            if (!validateDate(experience.from, experience.to)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Make sure that the date is valid",
+                    text: "from date must be before to date"
+                });
+                return;
+            }
+        }
+    }
     const worker = {
         id: id || new Date().getTime().toString(),
         name: document.getElementById('name').value,
@@ -98,7 +110,24 @@ function editWorker(e) {
 function handleListingActions(e) {
     loadWorkers();
     if (e.target.classList.contains('staffs__item__actions__delete')) {
-        deleteWorker(e);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteWorker(e);
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Worker has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
     } else if (e.target.classList.contains('staffs__item__actions__edit')) {
         editWorker(e);
     } else if (e.target.classList.contains('displayWorkerButton')) {

@@ -26,6 +26,10 @@ export function imageUrlValidation(url) {
     return url.match(validationRules['imageUrl'].regex) ? true : false;
 }
 
+export function validateDate(dateFrom , dateTo) {
+    return dateFrom <= dateTo ? true : false;
+}
+
 function toggleError(field, show, message = '') {
     if (show) {
         field.classList.add("border-red-500")
