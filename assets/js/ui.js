@@ -37,7 +37,7 @@ export function addExperienceForm() {
             </div>
         </div>
     `;
-    
+
     container.innerHTML += experienceHTML;
 
     for (let removeButton of container.getElementsByClassName('remove-experience')) {
@@ -143,6 +143,31 @@ export function displayPossibleWorkersByroom(roomId, workers) {
             </div>
             <button class="p-3 border border-quaternary rounded-md text-quaternary assignWorker">Assign</button>
         </li>`
+    }
+
+}
+export function displayAssignedWorkers(roomId, workers) {
+    const room = roomsList.find(room => room.id == roomId)
+    const list = document.getElementById(`${room.name}__assignedWorkers`)
+    let possibleWorkers = workers.filter(worker => worker.room == roomId)
+    if(possibleWorkers.length > 0){
+        list.closest('.room').classList.add("justify-start")
+        list.closest('.room').classList.remove("justify-center")
+        // list.closest('i').classList.add("hidden")
+    }
+    console.log(possibleWorkers)
+    list.innerHTML = ""
+    for (let worker of possibleWorkers) {
+        list.innerHTML += `
+        <div class="flex items-center gap-4 py-4 px-6  workerCard bg-quaternary" data-workerIdee="${worker.id}">
+            <div class="flex items-center gap-4">
+                <img class="w-12 h-12 rounded-full" src="${worker.picture}" alt="worker picture">
+                <div>
+                    <h3 class="text-lg font-semibold text-secondary">${worker.name}</h3>
+                    <p class="text-body text-primary">${worker.role}</p>
+                </div>
+            </div>
+        </div>`
     }
 
 }

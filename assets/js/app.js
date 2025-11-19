@@ -1,5 +1,5 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
-import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker, displayPossibleWorkersByroom } from './ui.js';
+import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker, displayPossibleWorkersByroom, displayAssignedWorkers } from './ui.js';
 import { validateForm, imageUrlValidation } from './validation.js';
 
 const form = document.getElementById('form');
@@ -8,6 +8,7 @@ const addWorkerBtn = document.getElementById('addWorker-button');
 const staffsList = document.getElementById('staffs__container');
 const assigneBtns = document.getElementsByClassName("assign-btn")
 const assignWorker = document.getElementsByClassName("assignWorker")
+const rooms = document.getElementsByClassName("room")
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 function loadWorkers() {
@@ -28,16 +29,22 @@ function initializeApp() {
             const roomId = e.target.closest('.room').getAttribute('data-roomId');
             displayPossibleWorkersByroom(roomId, getWorkers());
             for (let assign of assignWorker) {
-                assign.addEventListener("click", (e) => { 
+                assign.addEventListener("click", (e) => {
                     let workerId = e.target.closest('.workerCard').getAttribute('data-workerIdee');
-                    assignWorkerToRoom(workerId , roomId)
-                     displayPossibleWorkersByroom(roomId, getWorkers());
-                     loadWorkers()
+                    assignWorkerToRoom(workerId, roomId)
+                    displayPossibleWorkersByroom(roomId, getWorkers());
+                    loadWorkers()
+                    for (let room of rooms) {
+                        let roomId = room.getAttribute('data-roomId');
+                        displayAssignedWorkers(roomId, getWorkers());
+                        // console.log(roomId)
+                    }
                     // console.log(workerId)
                 })
             }
             // console.log(roomId);
         })
+
     }
 
     form.addEventListener('submit', submitJob);
@@ -51,7 +58,11 @@ function initializeApp() {
     })
     staffsList.addEventListener('click', handleListingActions);
 
-
+    for (let room of rooms) {
+        let roomId = room.getAttribute('data-roomId');
+        displayAssignedWorkers(roomId, getWorkers());
+        // console.log(roomId)
+    }
 }
 function submitJob(e) {
     e.preventDefault();
@@ -97,6 +108,7 @@ function editWorker(e) {
 }
 
 function handleListingActions(e) {
+    loadWorkers();
     if (e.target.classList.contains('staffs__item__actions__delete')) {
         deleteWorker(e);
     } else if (e.target.classList.contains('staffs__item__actions__edit')) {
