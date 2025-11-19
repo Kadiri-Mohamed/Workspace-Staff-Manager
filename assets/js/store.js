@@ -65,8 +65,7 @@ function unassignWorker(workerId) {
     const workers = getWorkers();
     const updatedWorkers = workers.map(worker => {
         if (worker.id === workerId) {
-            const { assignedRoom, ...workerWithoutRoom } = worker;
-            return workerWithoutRoom;
+           return { ...worker, room: null, assigned: false };
         }
         return worker;
     });

@@ -26,9 +26,9 @@
 #reception {
     grid-area: Reception;
 }
-#conferenceRoom , #serversRoom , #securityRoom , #vault , #staffRoom{
+/* #conferenceRoom , #serversRoom , #securityRoom , #vault , #staffRoom{
     height: 150px;
-}
+} */
 
 /* .room {
     width: 200px;
