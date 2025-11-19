@@ -28,20 +28,6 @@ function initializeApp() {
         btn.addEventListener('click', (e) => {
             const roomId = e.target.closest('.room').getAttribute('data-roomId');
             displayPossibleWorkersByroom(roomId, getWorkers());
-            for (let assign of assignWorker) {
-                assign.addEventListener("click", (e) => {
-                    let workerId = e.target.closest('.workerCard').getAttribute('data-workerIdee');
-                    assignWorkerToRoom(workerId, roomId)
-                    displayPossibleWorkersByroom(roomId, getWorkers());
-                    loadWorkers()
-                    for (let room of rooms) {
-                        let roomId = room.getAttribute('data-roomId');
-                        displayAssignedWorkers(roomId, getWorkers());
-                        // console.log(roomId)
-                    }
-                    // console.log(workerId)
-                })
-            }
             // console.log(roomId);
         })
 

@@ -47,9 +47,7 @@ function assignWorkerToRoom(workerId, roomId) {
             title: "Oops...",
             text: "Room is full"
         });
-    }else{
-
-        
+    } else {
         const updatedWorkers = workers.map(worker => {
             if (worker.id === workerId && !worker.assigned) {
                 return { ...worker, room: Number(roomId), assigned: true };
@@ -65,7 +63,7 @@ function unassignWorker(workerId) {
     const workers = getWorkers();
     const updatedWorkers = workers.map(worker => {
         if (worker.id === workerId) {
-           return { ...worker, room: null, assigned: false };
+            return { ...worker, room: null, assigned: false };
         }
         return worker;
     });

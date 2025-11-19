@@ -1,4 +1,4 @@
-import { roomsList, assignWorkerToRoom, unassignWorker , getWorkers } from "./store.js";
+import { roomsList, assignWorkerToRoom, unassignWorker, getWorkers } from "./store.js";
 export function addExperienceForm() {
     const container = document.getElementById('experiences__container');
     const experienceCount = container.querySelectorAll('.experience-item').length;
@@ -137,8 +137,10 @@ export function displayPossibleWorkersByroom(roomId, workers) {
     let room = roomsList.find(room => room.id == roomId)
     let possibleWorkers = workers.filter(worker => worker.roomId == null && room.rolesAccepted.includes(worker.role) && worker.assigned == false)
     for (let worker of possibleWorkers) {
-        list.innerHTML += `
-        <li class="flex items-center justify-between gap-4 py-4 px-6 border-b border-buffer-light workerCard" data-workerIdee="${worker.id}">
+        let div = document.createElement("div")
+        div.setAttribute("class", "flex items-center justify-between gap-4 py-4 px-6 border-b border-buffer-light workerCard")
+        div.setAttribute("data-workerIdee", worker.id)
+        div.innerHTML = `
             <div class="flex items-center gap-4">
                 <img class="w-12 h-12 rounded-full" src="${worker.picture}" alt="worker picture">
                 <div>
@@ -147,25 +149,23 @@ export function displayPossibleWorkersByroom(roomId, workers) {
                 </div>
             </div>
             <button class="p-3 border border-quaternary rounded-md text-quaternary assignWorker">Assign</button>
-        </li>`
-        
+    `
+        let assignWorkerBtn = div.querySelector('.assignWorker')
+        assignWorkerBtn.addEventListener('click', () => {
+            // console.log(worker.id)
+            assignWorkerToRoom(worker.id, roomId)
+            // console.log("deleted")
+            displayPossibleWorkersByroom(roomId, getWorkers());
+            displayAssignedWorkers(roomId, getWorkers())
+            displayWorkers(getWorkers())
+        })
+        list.appendChild(div)
     }
-
 }
 export function displayAssignedWorkers(roomId, workers) {
     const room = roomsList.find(room => room.id == roomId)
     const list = document.getElementById(`${room.name}__assignedWorkers`)
     let possibleWorkers = workers.filter(worker => worker.room == roomId)
-    // if (possibleWorkers.length > 0) {
-    //     // list.closest('.room').classList.add("justify-start")
-    //     // list.closest('.room').classList.remove("justify-center")
-    //     // // list.closest('i').classList.add("hidden")
-    // }else{
-    //     // list.closest('.room').classList.add("justify-center")
-    //     // list.closest('.room').classList.remove("justify-start")
-    //     // list.closest('i').classList.remove("hidden")
-    // }
-    console.log(possibleWorkers)
     list.innerHTML = ""
     for (let worker of possibleWorkers) {
         let div = document.createElement('div')
@@ -183,9 +183,9 @@ export function displayAssignedWorkers(roomId, workers) {
     `
         let unassignWorkerBtn = div.querySelector('.unassignWorker')
         unassignWorkerBtn.addEventListener('click', () => {
-            console.log(worker.id)
+            // console.log(worker.id)
             unassignWorker(worker.id)
-            console.log("deleted")
+            // console.log("deleted")
             displayAssignedWorkers(roomId, getWorkers())
             displayWorkers(getWorkers())
         })
