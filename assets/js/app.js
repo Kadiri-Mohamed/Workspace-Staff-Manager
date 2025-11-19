@@ -72,8 +72,10 @@ function submitJob(e) {
 
     if (id) {
         updateWorker(worker);
+        staffsList.addEventListener('click', handleListingActions);
     } else {
         addWorker(worker);
+        staffsList.addEventListener('click', handleListingActions);
     }
 
     clearForm();
@@ -101,7 +103,7 @@ function handleListingActions(e) {
         editWorker(e);
     } else if (e.target.classList.contains('displayWorkerButton')) {
         let worker = getWorker(e.target.closest(".staffs__item").getAttribute('data-id'));
-        console.log(worker);
+        // console.log(worker);
         displayWorker(worker);
     }
 }
