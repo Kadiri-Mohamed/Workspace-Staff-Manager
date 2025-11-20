@@ -53,7 +53,6 @@ export function getExperiences() {
     const experienceBlocks = document.getElementsByClassName('experience-item');
     const experiences = []
     for (let experienceBlock of experienceBlocks) {
-        
         if (experienceBlock.querySelector('.companyName').value !== "" && experienceBlock.querySelector('.roleCompany').value !== "" && experienceBlock.querySelector('.experienceFrom').value !== "" && experienceBlock.querySelector('.experienceTo').value !== "") {
             const experience = {
                 companyName: experienceBlock.querySelector('.companyName').value,
@@ -158,6 +157,12 @@ export function displayPossibleWorkersByroom(roomId, workers) {
         assignWorkerBtn.addEventListener('click', () => {
             // console.log(worker.id)
             assignWorkerToRoom(worker.id, roomId)
+             Swal.fire({
+            icon: "success",
+            title: `${worker.name} assigned to ${room.name}`,
+            showConfirmButton: false,
+            timer: 1500
+        });
             // console.log("deleted")
             displayPossibleWorkersByroom(roomId, getWorkers());
             displayAssignedWorkers(roomId, getWorkers())
@@ -187,11 +192,27 @@ export function displayAssignedWorkers(roomId, workers) {
     `
         let unassignWorkerBtn = div.querySelector('.unassignWorker')
         unassignWorkerBtn.addEventListener('click', () => {
+            Swal.fire({
+                title: `Are you sure u want to unnassign ${worker.name} from ${room.name}?`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, unassing him!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    unassignWorker(worker.id)
+                    displayAssignedWorkers(roomId, getWorkers())
+                    displayWorkers(getWorkers())
+                    Swal.fire({
+                        title: "Unassigned!",
+                        text: `${worker.name} has been unassigned.`,
+                        icon: "success"
+                    });
+                }
+            });
             // console.log(worker.id)
-            unassignWorker(worker.id)
             // console.log("deleted")
-            displayAssignedWorkers(roomId, getWorkers())
-            displayWorkers(getWorkers())
         })
         // displayAssignedWorkers()
         list.appendChild(div)
