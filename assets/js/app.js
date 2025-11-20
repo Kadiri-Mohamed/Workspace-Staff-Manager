@@ -116,9 +116,27 @@ function submitJob(e) {
 }
 function deleteWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
+    let worker = getWorker(id);
     // console.log(id);
-    deleteWorkerByID(id);
-    loadWorkers();
+    Swal.fire({
+        title: "Are you sure?",
+        text: `You want to delete ${worker.name} ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteWorkerByID(id);
+            loadWorkers();
+            Swal.fire({
+                title: "Deleted!",
+                text:  `${worker.name} has been deleted.`,
+                icon: "success"
+            });
+        }
+    });
 }
 function editWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
@@ -131,24 +149,8 @@ function editWorker(e) {
 function handleListingActions(e) {
     loadWorkers();
     if (e.target.classList.contains('staffs__item__actions__delete')) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                deleteWorker(e);
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Worker has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
+
+        deleteWorker(e);
     } else if (e.target.classList.contains('staffs__item__actions__edit')) {
         editWorker(e);
     } else if (e.target.classList.contains('displayWorkerButton')) {
