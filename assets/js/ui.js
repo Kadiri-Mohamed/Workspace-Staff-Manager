@@ -61,9 +61,10 @@ export function getExperiences() {
                 to: experienceBlock.querySelector('.experienceTo').value
             }
             experiences.push(experience);
-            return experiences;
+            // console.log(experiences)
         }
     }
+    return experiences;
 }
 
 export function clearForm() {
@@ -116,23 +117,43 @@ export function displayWorker(worker) {
     document.getElementById("worker-modal__name").textContent = worker.name;
     document.getElementById("worker-modal__role").textContent = worker.role;
     document.getElementById("worker-modal__email").textContent = worker.email;
+    document.getElementById("worker-modal__phone").textContent = worker.phone;
     document.getElementById("worker-modal__pic").src = worker.picture;
-    document.getElementById("worker-modal-exps").innerHTML = "";
+
+    const expList = document.getElementById("worker-modal-exps");
+    expList.innerHTML = "";
 
     if (worker.experience.length > 0) {
 
-        for (let exp of worker.experience) {
-            document.getElementById("worker-modal-exps").innerHTML += `
-            <li class="mb-11 ms-6">
-            <span
-            class="absolute flex items-center justify-center w-6 h-6 bg-brand-softer text-fg-brand rounded-full -start-3 ring-8 ring-buffer-medium">
-                                        </span>
-                                        <h3 class="flex items-start my-2 text-lg font-semibold text-secondary" id="worker-modal-exp">${exp.companyName}</h3>
-                                        <p class="text-body mb-5 text-quaternary" id="worker-modal-exp-role">${exp.role}</p>
-                                    </li>`
-        }
+        worker.experience.forEach((exp, index) => {
+
+            expList.innerHTML += `
+            <li class="mb-11 ms-6 w-full flex">
+               <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-softer text-fg-brand rounded-full -start-3 ring-8 ring-buffer-medium"> </span>
+
+                <div class="flex flex-col w-full">
+
+                    <div class="flex justify-between w-full">
+                        <h3 class="text-lg font-semibold text-secondary">
+                            ${exp.companyName}
+                        </h3>
+                        <p class="text-body text-quaternary">
+                            ${exp.from} |
+                            ${exp.to}
+                        </p>
+                    </div>
+
+                    <p class="text-body text-quaternary mb-4">
+                        ${exp.role}
+                    </p>
+
+                </div>
+            </li>
+            `;
+        });
     }
 }
+
 
 export function displayPossibleWorkersByroom(roomId, workers) {
     const list = document.getElementById("availvableWorkers-list")
@@ -157,12 +178,12 @@ export function displayPossibleWorkersByroom(roomId, workers) {
         assignWorkerBtn.addEventListener('click', () => {
             // console.log(worker.id)
             assignWorkerToRoom(worker.id, roomId)
-             Swal.fire({
-            icon: "success",
-            title: `${worker.name} assigned to ${room.name}`,
-            showConfirmButton: false,
-            timer: 1500
-        });
+            Swal.fire({
+                icon: "success",
+                title: `${worker.name} assigned to ${room.name}`,
+                showConfirmButton: false,
+                timer: 1500
+            });
             // console.log("deleted")
             displayPossibleWorkersByroom(roomId, getWorkers());
             displayAssignedWorkers(roomId, getWorkers())

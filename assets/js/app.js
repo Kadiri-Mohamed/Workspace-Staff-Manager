@@ -80,7 +80,7 @@ function submitJob(e) {
         }
     }
     const worker = {
-        id: id || new Date().getTime().toString(),
+        id: id || Number(new Date().getTime().toString()),
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         picture: document.getElementById('photo').value || './assets/images/worker.png',
@@ -93,11 +93,15 @@ function submitJob(e) {
 
     // console.log(typeof id)
     if (id) {
-        console.log("update")
         updateWorker(worker);
-        console.log(worker)
-        console.log("updated")
-        loadWorkers();
+         Swal.fire({
+            icon: "success",
+            title: "Worker has been modified",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        document.getElementById('crud-modal').classList.add('hidden')
+        document.getElementById('crud-modal').firstElementChild.classList.add('hidden')
         staffsList.addEventListener('click', handleListingActions);
     } else {
         addWorker(worker);
@@ -107,6 +111,7 @@ function submitJob(e) {
             showConfirmButton: false,
             timer: 1500
         });
+        document.getElementById('crud-modal').classList.add('hidden')
         staffsList.addEventListener('click', handleListingActions);
     }
 
@@ -116,7 +121,7 @@ function submitJob(e) {
 }
 function deleteWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
-    let worker = getWorker(id);
+    let worker = getWorker(Number(id));
     // console.log(id);
     Swal.fire({
         title: "Are you sure?",
@@ -128,7 +133,7 @@ function deleteWorker(e) {
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteWorkerByID(id);
+            deleteWorkerByID(Number(id));
             loadWorkers();
             Swal.fire({
                 title: "Deleted!",
@@ -141,7 +146,8 @@ function deleteWorker(e) {
 function editWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
     // console.log(id);
-    const worker = getWorker(id);
+    const worker = getWorker(Number(id));
+    console.log(worker);
     populateForm(worker)
     // console.log(worker);
 }
@@ -149,7 +155,6 @@ function editWorker(e) {
 function handleListingActions(e) {
     loadWorkers();
     if (e.target.classList.contains('staffs__item__actions__delete')) {
-
         deleteWorker(e);
     } else if (e.target.classList.contains('staffs__item__actions__edit')) {
         editWorker(e);
