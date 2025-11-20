@@ -101,7 +101,6 @@ function submitJob(e) {
             timer: 1500
         });
         document.getElementById('crud-modal').classList.add('hidden')
-        document.getElementById('crud-modal').firstElementChild.classList.add('hidden')
         staffsList.addEventListener('click', handleListingActions);
     } else {
         addWorker(worker);
@@ -111,7 +110,8 @@ function submitJob(e) {
             showConfirmButton: false,
             timer: 1500
         });
-        document.getElementById('crud-modal').classList.add('hidden')
+        // document.getElementById('crud-modal').classList.add('hidden')
+        // document.getElementById('crud-modal').nextElementSibling.classList.add('hidden')
         staffsList.addEventListener('click', handleListingActions);
     }
 
