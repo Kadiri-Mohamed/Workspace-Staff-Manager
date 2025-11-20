@@ -34,6 +34,10 @@ function initializeApp() {
 
     }
 
+    addWorkerBtn.addEventListener('click', () => {
+            document.getElementById("submitForm").textContent = "Add new Worker";
+    })
+
     searchInput.addEventListener('input', (e) => {
         const workers = getWorkers();
         const filteredWorkers = workers.filter(worker => worker.name.toLowerCase().includes(e.target.value.toLowerCase()) || worker.role.toLowerCase().includes(e.target.value.toLowerCase()));
@@ -101,7 +105,6 @@ function submitJob(e) {
             timer: 1500
         });
         document.getElementById('crud-modal').classList.add('hidden')
-        staffsList.addEventListener('click', handleListingActions);
     } else {
         addWorker(worker);
         Swal.fire({

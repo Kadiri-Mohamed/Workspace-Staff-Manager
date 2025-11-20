@@ -178,12 +178,7 @@ export function displayPossibleWorkersByroom(roomId, workers) {
         assignWorkerBtn.addEventListener('click', () => {
             // console.log(worker.id)
             assignWorkerToRoom(worker.id, roomId)
-            Swal.fire({
-                icon: "success",
-                title: `${worker.name} assigned to ${room.name}`,
-                showConfirmButton: false,
-                timer: 1500
-            });
+            
             // console.log("deleted")
             displayPossibleWorkersByroom(roomId, getWorkers());
             displayAssignedWorkers(roomId, getWorkers())
@@ -219,7 +214,7 @@ export function displayAssignedWorkers(roomId, workers) {
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, unassing him!"
+                confirmButtonText: "Yes, unassing!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     unassignWorker(worker.id)
@@ -242,6 +237,7 @@ export function displayAssignedWorkers(roomId, workers) {
 }
 
 export function populateForm(worker) {
+    document.getElementById("submitForm").textContent = "Update Worker";
     document.getElementById('crud-modal').classList.remove('hidden')
     document.getElementById('worker-id').value = worker.id;
     document.getElementById('name').value = worker.name;

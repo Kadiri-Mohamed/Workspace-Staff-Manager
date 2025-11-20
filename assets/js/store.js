@@ -54,6 +54,12 @@ function assignWorkerToRoom(workerId, roomId) {
             if (worker.id === workerId && !worker.assigned) {
                 return { ...worker, room: Number(roomId), assigned: true };
             }
+            Swal.fire({
+                            icon: "success",
+                            title: `${worker.name} assigned to ${room.name}`,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
             return worker;
         });
         // console.log(updatedWorkers)
