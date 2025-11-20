@@ -27,7 +27,7 @@ function addWorker(worker) {
 function updateWorker(updatedWorker) {
     const workers = getWorkers();
     const updatedWorkers = workers.map(worker =>
-        worker.id === updatedWorker.id ? updatedWorker : worker
+        worker.id == updatedWorker.id ? updatedWorker : worker
     );
     localStorage.setItem('workers', JSON.stringify(updatedWorkers));
 }

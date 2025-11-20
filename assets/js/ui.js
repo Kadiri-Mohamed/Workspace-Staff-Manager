@@ -69,6 +69,8 @@ export function getExperiences() {
 
 export function clearForm() {
     document.getElementById('form').reset();
+    document.getElementById('displayedPic').src = "";
+    document.getElementById('experiences__container').innerHTML = "";
 }
 
 export function displayPicture(image) {
@@ -83,10 +85,10 @@ export function displayWorkers(workers) {
     for (let worker of workers) {
         if (worker.assigned == false) {
             const workerHTML = `
-            <div class="staffs__item text-start w-full bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}">
+            <div class="staffs__item text-start w-full bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 mb-3" data-id="${worker.id}" draggable="true">
     <div class="staffs__item__info flex items-center justify-between">
         <div class="staffs__item__info__avatar">
-            <img src="${worker.picture}" alt="Avatar" class="w-16 h-16 rounded-full object-cover me-5">
+            <img src="${worker.picture ? worker.picture : './assets/images/avatar.png'}" alt="Avatar" class="w-16 h-16 rounded-full object-cover me-5">
         </div>
         <div class="staffs__item__info__content flex-1">
             <div class="staffs__item__info__name">
@@ -195,4 +197,14 @@ export function displayAssignedWorkers(roomId, workers) {
         list.appendChild(div)
     }
 
+}
+
+export function populateForm(worker) {
+    document.getElementById('crud-modal').classList.remove('hidden')
+    document.getElementById('worker-id').value = worker.id;
+    document.getElementById('name').value = worker.name;
+    document.getElementById('role').value = worker.role;
+    document.getElementById('photo').value = worker.picture;
+    document.getElementById('email').value = worker.email;
+    document.getElementById('phone').value = worker.phone;
 }

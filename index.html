@@ -28,7 +28,10 @@
 
     <main class="main flex flex-col w-full lg:justify-between lg:flex-row h-screen">
         <section class="sideBare bg-primary w-full py-5 flex flex-col items-center justify-between lg:w-[30%] ">
-            <h2 class="text-2xl font-bold mb-6 text-secondary ">Staff Members</h2>
+            <div>
+                <h2 class="text-2xl font-bold mb-6 text-secondary text-center">Staff Members</h2>
+                <input type="text" id="searchInput" placeholder="Seach for staff" class="px-3 py-2 rounded-md text-center">
+            </div>
             <div id="worker-modal" tabindex="-1" aria-hidden="true"
                 class="hidden bg overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full inset-0 ">
                 <div class="relative p-4 w-full max-w-md max-h-full">
@@ -289,7 +292,8 @@
             </div>
 
             <!-- Servers Room -->
-            <div id="serversRoom" class="room flex flex-col items-center justify-center  bg-red-500/50 " data-roomId="2">
+            <div id="serversRoom" class="room flex flex-col items-center justify-center  bg-red-500/50 "
+                data-roomId="2">
                 <i class="fas fa-server text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Servers Room</h3>
                 <div class="assignedWorkers overflow-y-auto h-24 lg:h-20" id="serversRoom__assignedWorkers">
@@ -302,7 +306,8 @@
             </div>
 
             <!-- Security Room -->
-            <div id="securityRoom" class="room flex flex-col items-center justify-center  bg-red-500/50 " data-roomId="3">
+            <div id="securityRoom" class="room flex flex-col items-center justify-center  bg-red-500/50 "
+                data-roomId="3">
                 <i class="fas fa-shield-alt text-3xl text-black"></i>
                 <h3 class="text-black font-bold text-lg text-center">Security Room</h3>
                 <div class="assignedWorkers overflow-y-auto h-24 lg:h-20" id="securityRoom__assignedWorkers">

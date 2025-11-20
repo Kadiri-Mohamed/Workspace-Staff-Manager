@@ -1,5 +1,5 @@
 import { getWorkers, getWorker, addWorker, updateWorker, deleteWorker as deleteWorkerByID, assignWorkerToRoom, unassignWorker, getWorkersByRoom } from './store.js';
-import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker, displayPossibleWorkersByroom, displayAssignedWorkers } from './ui.js';
+import { addExperienceForm, getExperiences, clearForm, displayWorkers, displayPicture, displayWorker, displayPossibleWorkersByroom, displayAssignedWorkers, populateForm } from './ui.js';
 import { validateForm, imageUrlValidation, validateDate } from './validation.js';
 
 const form = document.getElementById('form');
@@ -8,6 +8,7 @@ const addWorkerBtn = document.getElementById('addWorker-button');
 const staffsList = document.getElementById('staffs__container');
 const assigneBtns = document.getElementsByClassName("assign-btn")
 const assignWorker = document.getElementsByClassName("assignWorker")
+const searchInput = document.getElementById("searchInput")
 const rooms = document.getElementsByClassName("room")
 document.addEventListener('DOMContentLoaded', initializeApp);
 
@@ -33,6 +34,14 @@ function initializeApp() {
 
     }
 
+    searchInput.addEventListener('input', (e) => {
+        const workers = getWorkers();
+        const filteredWorkers = workers.filter(worker => worker.name.toLowerCase().includes(e.target.value.toLowerCase()) || worker.role.toLowerCase().includes(e.target.value.toLowerCase()));
+        displayWorkers(filteredWorkers);
+    })
+
+
+
     form.addEventListener('submit', submitJob);
     document.getElementById('photo').addEventListener('input', () => {
         let valid = imageUrlValidation(document.getElementById('photo').value);
@@ -57,7 +66,7 @@ function submitJob(e) {
         return;
     }
 
-    const id = form.firstElementChild.getAttribute('worker-id');
+    const id = Number(document.getElementById("worker-id").getAttribute("value"));
     if (getExperiences()) {
         for (let experience of getExperiences()) {
             if (!validateDate(experience.from, experience.to)) {
@@ -82,8 +91,13 @@ function submitJob(e) {
         experience: getExperiences()
     }
 
+    // console.log(typeof id)
     if (id) {
+        console.log("update")
         updateWorker(worker);
+        console.log(worker)
+        console.log("updated")
+        loadWorkers();
         staffsList.addEventListener('click', handleListingActions);
     } else {
         addWorker(worker);
@@ -110,6 +124,7 @@ function editWorker(e) {
     const id = e.target.closest(".staffs__item").getAttribute('data-id');
     // console.log(id);
     const worker = getWorker(id);
+    populateForm(worker)
     // console.log(worker);
 }
 
