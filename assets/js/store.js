@@ -58,7 +58,7 @@ function assignWorkerToRoom(workerId, roomId) {
                             icon: "success",
                             title: `${worker.name} assigned to ${room.name}`,
                             showConfirmButton: false,
-                            timer: 1000
+                            timer: 1500
                         });
             return worker;
         });

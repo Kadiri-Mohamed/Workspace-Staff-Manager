@@ -1,5 +1,10 @@
 @import url(../../tailwind.config.js);
 
+body {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
 * {
     transition: all 0.3s ease-in-out;
 }
@@ -69,16 +74,20 @@
 }
 
 @media (max-width: 768px) {
-    .room{
+    .room {
         padding-bottom: 10px;
+        padding-top: 10px;
+        border: 1px solid black;
     }
+
     .rooms {
-         grid-template-columns: 1fr;
+        grid-template-columns: auto;
         grid-template-rows: auto;
         background: none;
         grid-template-areas:
-            'conferenceRoom serversRoom securityRoom'
-            'staffRoom Reception vault';
+            'conferenceRoom serversRoom'
+            'securityRoom staffRoom'
+            'Reception vault';
         ;
     }
 }
