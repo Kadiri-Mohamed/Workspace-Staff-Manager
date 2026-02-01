@@ -2,7 +2,7 @@ export const roomsList = [
     { id: 1, name: "conferenceRoom", capacity: 3, rolesAccepted: ["IT Guy", "Other", "Manager"] },
     { id: 2, name: "serversRoom", capacity: 2, rolesAccepted: ["IT Guy", "Manager"] },
     { id: 3, name: "securityRoom", capacity: 5, rolesAccepted: ["Securete", "Manager", "Cleaning"] },
-    { id: 4, name: "reception", capacity: 2, rolesAccepted: ["Reception", "Cleaning", "Manager"] },
+    { id: 4, name: "reception", capacity: 3, rolesAccepted: ["Reception", "Cleaning", "Manager"] },
     { id: 5, name: "staffRoom", capacity: 4, rolesAccepted: ["IT Guy", "Cleaning", "Manager"] },
     { id: 6, name: "vault", capacity: 2, rolesAccepted: ["Manager"] },
 ]
@@ -43,6 +43,14 @@ function assignWorkerToRoom(workerId, roomId) {
     const room = roomsList.find(room => room.id == roomId);
     const workers = getWorkers();
     const alreadyAssigned = workers.filter(worker => worker.room === Number(roomId));
+    let workerRole = getWorker(workerId).role
+    for(let item of alreadyAssigned){
+        if(item.role == workerRole){
+            return
+        }
+    }  
+
+
     if (alreadyAssigned.length >= room.capacity) {
         Swal.fire({
             icon: "error",

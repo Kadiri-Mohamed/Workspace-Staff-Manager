@@ -8,7 +8,7 @@ const validationRules = {
         message: "Role must be 2-50 letters only."
     },
     'email': {
-        regex: /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/,
+        regex: /^[\w.-]+@youcode.[A-Za-z]{2,}$/,
         message: "Invalid email format."
     },
     'phone': {
